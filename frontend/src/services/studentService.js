@@ -30,10 +30,12 @@ export const updateStudent = async (
   id,
   studentData
 ) => {
-  const response = await axios.put(
-    `http://localhost:5000/api/students/${id}`,
-    studentData
-  );
+
+  const response =
+    await axios.put(
+      `${API_URL}/${id}`,
+      studentData
+    );
 
   return response.data;
 };
