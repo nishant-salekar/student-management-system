@@ -82,23 +82,21 @@ function StudentTable({
 
                 <td className="p-3">
 
-                  {student.photo ? (
+  {student.photo ? (
 
-                    <img
-                      src={`http://localhost:5000/uploads/${student.photo}`}
-                      alt={student.name}
-                      className="w-12 h-12 rounded-full object-cover mx-auto border"
-                    />
+    <img
+      src={student.photo}
+      alt={student.name}
+      className="w-12 h-12 rounded-full object-cover mx-auto"
+    />
 
-                  ) : (
+  ) : (
 
-                    <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center mx-auto">
-                      👤
-                    </div>
+    <div className="w-12 h-12 rounded-full bg-gray-300 mx-auto"></div>
 
-                  )}
+  )}
 
-                </td>
+</td>
 
                 <td className="font-medium">
                   {student.name}

@@ -43,14 +43,65 @@ const handleSubmit = async (e) => {
     const admissionNumber =
       "PU" + Date.now();
 
-    const newStudent = {
-      ...student,
-      admissionNumber,
-      year: Number(student.year),
-    };
+    const formData =
+  new FormData();
+
+formData.append(
+  "admissionNumber",
+  admissionNumber
+);
+
+formData.append(
+  "name",
+  student.name
+);
+
+formData.append(
+  "course",
+  student.course
+);
+
+formData.append(
+  "year",
+  student.year
+);
+
+formData.append(
+  "dob",
+  student.dob
+);
+
+formData.append(
+  "email",
+  student.email
+);
+
+formData.append(
+  "mobile",
+  student.mobile
+);
+
+formData.append(
+  "gender",
+  student.gender
+);
+
+formData.append(
+  "address",
+  student.address
+);
+
+if (student.photo) {
+
+  formData.append(
+    "photo",
+    student.photo
+  );
+
+}
 
     const savedStudent =
-      await createStudent(newStudent);
+      await createStudent(formData);
 
     setStudents((prev) => [
       savedStudent,

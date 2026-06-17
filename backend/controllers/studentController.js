@@ -1,5 +1,7 @@
 const prisma = require("../config/prisma");
 
+const cloudinary = require("../config/cloudinary");
+
 const getStudents = async (req, res) => {
   try {
     const students =
@@ -17,8 +19,12 @@ const getStudents = async (req, res) => {
   }
 };
 
-const createStudent = async (req, res) => {
+const createStudent = async (
+  req,
+  res
+) => {
   try {
+
     const {
       admissionNumber,
       name,
@@ -31,9 +37,27 @@ const createStudent = async (req, res) => {
       address,
     } = req.body;
 
-    const photo = req.file
-      ? req.file.filename
-      : null;
+    let photoUrl = null;
+
+    if (req.file) {
+
+      const fileString =
+        `data:${req.file.mimetype};base64,${req.file.buffer.toString(
+          "base64"
+        )}`;
+
+      const uploadedImage =
+        await cloudinary.uploader.upload(
+          fileString,
+          {
+            folder:
+              "student-management-system",
+          }
+        );
+
+      photoUrl =
+        uploadedImage.secure_url;
+    }
 
     const student =
       await prisma.student.create({
@@ -47,15 +71,20 @@ const createStudent = async (req, res) => {
           mobile,
           gender,
           address,
-          photo,
+          photo: photoUrl,
         },
       });
 
     res.status(201).json(student);
+
   } catch (error) {
+
+    console.log(error);
+
     res.status(500).json({
       message: error.message,
     });
+
   }
 };
 

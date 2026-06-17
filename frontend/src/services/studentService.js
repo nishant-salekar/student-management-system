@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL =  "https://student-management-system-7via.onrender.com/api/students";
+const API_URL = "http://localhost:5000/api/students";
 
 export const getStudents = async () => {
   const response = await axios.get(API_URL);
@@ -8,29 +8,20 @@ export const getStudents = async () => {
 };
 
 export const createStudent = async (
-  studentData
+  formData
 ) => {
-  const formData = new FormData();
 
-  Object.keys(studentData).forEach(
-    (key) => {
-      formData.append(
-        key,
-        studentData[key]
-      );
-    }
-  );
-
-  const response = await axios.post(
-    API_URL,
-    formData,
-    {
-      headers: {
-        "Content-Type":
-          "multipart/form-data",
-      },
-    }
-  );
+  const response =
+    await axios.post(
+      API_URL,
+      formData,
+      {
+        headers: {
+          "Content-Type":
+            "multipart/form-data",
+        },
+      }
+    );
 
   return response.data;
 };

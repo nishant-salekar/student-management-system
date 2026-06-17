@@ -28,19 +28,24 @@ function ViewStudentModal({
 
         <div className="flex flex-col items-center mb-6">
 
-          {student.photo ? (
-            <img
-              src={`http://localhost:5000/uploads/${student.photo}`}
-              alt={student.name}
-              className="w-28 h-28 rounded-full object-cover border-4 border-blue-500"
-            />
-          ) : (
-            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-4xl">
-              👤
-            </div>
-          )}
+  <img
+    src={
+      student.photo ||
+      "https://via.placeholder.com/150"
+    }
+    alt={student.name}
+    className="w-32 h-32 rounded-full object-cover border-4 border-blue-500 shadow-lg"
+  />
 
-        </div>
+  <h3 className="mt-4 text-xl font-bold text-gray-800">
+    {student.name}
+  </h3>
+
+  <p className="text-gray-500">
+    {student.admissionNumber}
+  </p>
+
+</div>
 
         <div className="grid grid-cols-2 gap-4">
 
